@@ -23,11 +23,13 @@ variable "contact" {
 }
 
 variable "ecr_nginx_img_uri" {
-  default = "014571658325.dkr.ecr.us-east-1.amazonaws.com/movies-reviews-api-nginx:latest"
+  type = string
+  description = "ecr repo uri for the proxy image"
 }
 
 variable "ecr_api_img_uri" {
-  default = "014571658325.dkr.ecr.us-east-1.amazonaws.com/movies-reviews-api-api:latest"
+  type = string
+  description = "ecr repo uri for the api image"
 }
 
 variable "db_username" {
