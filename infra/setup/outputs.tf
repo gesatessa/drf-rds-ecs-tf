@@ -8,9 +8,9 @@ output "cd_user_secret_access_key" {
 }
 
 output "ecr_uri_api" {
-  value = aws_ecr_repository.api.arn
+  value = aws_ecr_repository.api.repository_url
 }
 
 output "ecr_uri_nginx" {
-  value = aws_ecr_repository.nginx.arn
+  value = aws_ecr_repository.nginx.repository_url
 }

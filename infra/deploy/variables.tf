@@ -1,6 +1,7 @@
 variable "project_name" {
   description = "Name of the project"
   type        = string
+  default = "movies-drf-api"
 }
 
 variable "aws_region" {
