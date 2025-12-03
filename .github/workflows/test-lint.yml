@@ -85,12 +85,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: terraform format & validation
         run: |
           cd infra
           docker compose run --rm tf -chdir=setup init -backend=false
           docker compose run --rm tf -chdir=deploy init -backend=false
-          docker compose run --rm tf -chdir=setup fmt -check
-          docker compose run --rm tf -chdir=deploy fmt -check
+
+          echo "🔍 Checking Terraform formatting..."
+          set +e
+
+          # Check setup
+          FMT_SETUP=$(docker compose run --rm tf -chdir=setup fmt -check -diff)
+          EXIT_SETUP=$?
+
+          # Check deploy
+          FMT_DEPLOY=$(docker compose run --rm tf -chdir=deploy fmt -check -diff)
+          EXIT_DEPLOY=$?
+
+          set -e
+
+          if [ $EXIT_SETUP -ne 0 ] || [ $EXIT_DEPLOY -ne 0 ]; then
+            echo "❌ Terraform formatting issues detected:"
+            [ $EXIT_SETUP -ne 0 ] && echo "--- setup/ ---" && echo "$FMT_SETUP"
+            [ $EXIT_DEPLOY -ne 0 ] && echo "--- deploy/ ---" && echo "$FMT_DEPLOY"
+            echo
+            echo "💡 Fix this by running:"
+            echo "    docker compose run --rm tf -chdir=setup fmt"
+            echo "    docker compose run --rm tf -chdir=deploy fmt"
+            exit 1
+          else
+            echo "✅ Terraform files are properly formatted."
+          fi
+
+          echo "🔍 Running terraform validate..."
           docker compose run --rm tf -chdir=setup validate
           docker compose run --rm tf -chdir=deploy validate
