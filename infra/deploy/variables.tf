@@ -13,6 +13,7 @@ variable "aws_region" {
 variable "state_bucket" {
   description = "S3 bucket name used for storing Terraform state"
   type        = string
+  default = "movies-drf-api"
 }
 
 variable "contact" {
