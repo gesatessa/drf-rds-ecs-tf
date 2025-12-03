@@ -23,12 +23,12 @@ variable "contact" {
 }
 
 variable "ecr_nginx_img_uri" {
-  type = string
+  type        = string
   description = "ecr repo uri for the proxy image"
 }
 
 variable "ecr_api_img_uri" {
-  type = string
+  type        = string
   description = "ecr repo uri for the api image"
 }
 
