@@ -1,7 +1,7 @@
 variable "project_name" {
   description = "Name of the project"
   type        = string
-  default = "movies-drf-api"
+  default     = "movies-drf-api"
 }
 
 variable "aws_region" {
@@ -13,7 +13,7 @@ variable "aws_region" {
 variable "state_bucket" {
   description = "S3 bucket name used for storing Terraform state"
   type        = string
-  default = "movies-drf-api"
+  default     = "movies-drf-api"
 }
 
 variable "contact" {
@@ -35,6 +35,7 @@ variable "db_username" {
   default     = "adminx"
 }
 
+# N.B. db password MUST be more than 8 characters.
 variable "db_password" {
   description = "The password for the RDS database"
   type        = string
