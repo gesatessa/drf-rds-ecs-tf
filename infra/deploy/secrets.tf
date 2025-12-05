@@ -1,13 +1,13 @@
-resource "random_id" "secret_suffix" {
-  byte_length = 4 # 8 hex chars like "a3f9c12d"
-  keepers = {
-    environment = terraform.workspace
-  }
-}
+# resource "random_id" "secret_suffix" {
+#   byte_length = 4 # 8 hex chars like "a3f9c12d"
+#   keepers = {
+#     environment = terraform.workspace
+#   }
+# }
 
-locals {
-  suffix = random_id.secret_suffix.hex
-}
+# locals {
+#   suffix = random_id.secret_suffix.hex
+# }
 
 
 resource "aws_secretsmanager_secret" "db_password" {
