@@ -11,8 +11,8 @@ locals {
 
 
 resource "aws_secretsmanager_secret" "db_password" {
-  # name        = "${local.prefix}-db-password"
-  name        = "${local.prefix}-${local.suffix}-db-password"
+  name        = "${local.prefix}-db-password"
+  # name        = "${local.prefix}-${local.suffix}-db-password"
   description = "Database password for Django app"
 }
 
@@ -22,7 +22,8 @@ resource "aws_secretsmanager_secret_version" "db_password" {
 }
 
 resource "aws_secretsmanager_secret" "django_secret_key" {
-  name        = "${local.prefix}-${local.suffix}-django-secret-key"
+  name        = "${local.prefix}-django-secret-key"
+  # name        = "${local.prefix}-${local.suffix}-django-secret-key"
   description = "Django SECRET_KEY"
 }
 
