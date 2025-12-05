@@ -53,6 +53,13 @@ jobs:
 
           docker build -t $ECR_REPO_PROXY:$GITHUB_SHA -f ./proxy/Dockerfile ./proxy
           docker push $ECR_REPO_PROXY:$GITHUB_SHA
+          
+      - name: Debug image names
+        run: |
+          echo "API:   '${TF_VAR_ecr_api_img_uri}'"
+          echo "PROXY: '${TF_VAR_ecr_nginx_img_uri}'"
+          echo "gha-proxy": "vars.ECR_REPO_PROXY"
+          echo "gha-api": "var.ECR_REPO_API"
 
       - name: terraform apply
         env:
