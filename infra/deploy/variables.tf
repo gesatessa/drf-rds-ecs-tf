@@ -10,11 +10,11 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "state_bucket" {
-  description = "S3 bucket name used for storing Terraform state"
-  type        = string
-  default     = "movies-drf-api"
-}
+# variable "state_bucket" {
+#   description = "S3 bucket name used for storing Terraform state"
+#   type        = string
+#   default     = "movies-drf-api"
+# }
 
 variable "contact" {
   description = "Primary contact for this deployment"

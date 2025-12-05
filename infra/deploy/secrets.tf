@@ -1,5 +1,18 @@
+resource "random_id" "secret_suffix" {
+  byte_length = 4 # 8 hex chars like "a3f9c12d"
+  keepers = {
+    environment = terraform.workspace
+  }
+}
+
+locals {
+  suffix = random_id.secret_suffix.hex
+}
+
+
 resource "aws_secretsmanager_secret" "db_password" {
-  name        = "${local.prefix}-db-password"
+  # name        = "${local.prefix}-db-password"
+  name        = "${local.prefix}-${local.suffix}-db-password"
   description = "Database password for Django app"
 }
 
@@ -9,7 +22,7 @@ resource "aws_secretsmanager_secret_version" "db_password" {
 }
 
 resource "aws_secretsmanager_secret" "django_secret_key" {
-  name        = "${local.prefix}-django-secret-key"
+  name        = "${local.prefix}-${local.suffix}-django-secret-key"
   description = "Django SECRET_KEY"
 }
 
